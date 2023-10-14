@@ -37,9 +37,44 @@
   <h1>Global Broadband Speed</h1>
   <p>This immersive experience takes you on a journey across continents, exploring the varying speeds at which people around the world connect to the internet</p>
   <div class="vis" id="map"/>
+
+  <p>Compare the broadband speed between countries filtered by continents</p>
+  <div class="vis" id="bar"/>
     
   <script>
     const map = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1000,
+  "height": 450,
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/dlee0069/FIT3179_Asg2/main/ne_110m_admin_0_countries.json",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/dlee0069/FIT3179_Asg2/main/internet%20broadband%20and%20mobile%20speeds%20by%20country.csv"
+        },
+        "key": "Country",
+        "fields": ["Broadband Mbps"]
+      },
+      "default": "0"
+    }
+  ],
+  "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.05},
+  "encoding": {
+    "color": {"field": "Broadband Mbps", "type": "quantitative" },
+    "tooltip": [
+      {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+      {"field": "Broadband Mbps", "type": "quantitative"}
+    ]
+  }
+};
+
+    const bar = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
     "url": "https://raw.githubusercontent.com/dlee0069/FIT3179_Asg2/main/internet%20broadband%20and%20mobile%20speeds%20by%20country.csv"
@@ -50,105 +85,35 @@
       "bind": {
         "name": "Continent filter: ",
         "input": "select",
-        "options": [
-          "Asia",
-          "Africa",
-          "North America",
-          "South America",
-          "Europe",
-          "Oceania"
-        ]
-      },
-      "value": "Asia"
+        "options": ["Asia", "Africa", "North America", "South America", "Europe", "Oceania"]
+      }, "value": "Asia"
     }
   ],
-  "vconcat": [
-    {
-      "width": 1000,
-      "height": 450,
-      "projection": {"type": "equalEarth"},
-      "data": {
-        "url": "https://raw.githubusercontent.com/dlee0069/FIT3179_Asg2/main/ne_110m_admin_0_countries.json",
-        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
-      },
-      "transform": [
-        {
-          "lookup": "properties.NAME",
-          "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/dlee0069/FIT3179_Asg2/main/internet%20broadband%20and%20mobile%20speeds%20by%20country.csv"
-            },
-            "key": "Country",
-            "fields": ["Broadband Mbps"]
-          },
-          "default": "0"
-        }
-      ],
-      "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.05},
-      "encoding": {
-        "color": {"field": "Broadband Mbps", "type": "quantitative"},
-        "tooltip": [
-          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-          {"field": "Broadband Mbps", "type": "quantitative"}
-        ]
+  "mark": "bar",
+  "encoding": {
+    "y": { "field": "Broadband Mbps", "type": "quantitative" },
+    "x": { "field": "Country", "type": "nominal", "title": "", "sort": "-y" },
+    "color": {
+      "field": "Continent",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Asia", "Africa", "North America", "South America", "Europe", "Oceania"],
+        "range": ["darkblue", "green", "brown", "lightblue", "orange", "purple"]
       }
     },
-    {
-      "layer": [
-        {
-          "mark": "bar",
-          "encoding": {
-            "y": {"field": "Broadband Mbps", "type": "quantitative"},
-            "x": {
-              "field": "Country",
-              "type": "nominal",
-              "title": "",
-              "sort": "-y"
-            },
-            "color": {
-              "field": "Continent",
-              "type": "nominal",
-              "scale": {
-                "domain": [
-                  "Asia",
-                  "Africa",
-                  "North America",
-                  "South America",
-                  "Europe",
-                  "Oceania"
-                ],
-                "range": [
-                  "darkblue",
-                  "green",
-                  "brown",
-                  "lightblue",
-                  "orange",
-                  "purple"
-                ]
-              }
-            },
-            "tooltip": [
-              {
-                "field": "Broadband Speed Rank",
-                "type": "nominal",
-                "title": "Rank: "
-              },
-              {"field": "Country", "type": "nominal", "title": "Country: "},
-              {
-                "field": "Broadband Mbps",
-                "type": "quantitative",
-                "title": "Broadband Mbps: "
-              }
-            ]
-          },
-          "transform": [{"filter": "datum.Continent == Continent_filter"}]
-        }
-      ]
-    }
-  ],
-  "config": {}
+    "tooltip": [
+      {"field": "Broadband Speed Rank", "type": "nominal", "title": "Rank: "},
+      {"field": "Country", "type": "nominal", "title": "Country: "},
+      {"field": "Broadband Mbps", "type": "quantitative", "title": "Broadband Mbps: "}
+    ]
+  },
+  "transform": [
+    {"filter": "datum.Continent == Continent_filter"}
+  ]
 };
+    
     vegaEmbed("#map", map, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+    vegaEmbed("#bar", bar, {mode: "vega-lite"}).then(console.log).catch(console.warn);
   </script>
 </body>
 </html>
