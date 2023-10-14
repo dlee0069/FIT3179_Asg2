@@ -5,25 +5,6 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
   <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #000D2C;
-        }
-
-        h1 {
-            color: #00FFD0;
-            font-weight: bold;
-        }
-
-        h2 {
-            color: #00FFD0;
-        }
-
-        p {
-            color: #FFFFFF;
-        }
-
         .vis {
             margin: 40px 0;
             background-color: #fff;
@@ -33,14 +14,13 @@
         }
     </style>
 </head>
-<body>
-  <h1>Global Broadband Speed</h1>
-  <p>This immersive experience takes you on a journey across continents, exploring the varying speeds at which people around the world connect to the internet</p>
+<body style="font-family: Arial, sans-serif; text-align: center; background-color: #000D2C;">
+  <h1 style="color: #00FFD0; font-weight: bold;">Global Broadband Speed</h1>
+  <p style="color: #FFFFFF;">This immersive experience takes you on a journey across continents, exploring the varying speeds at which people around the world connect to the internet</p>
   <div class="vis" id="map"></div>
 
-  <div class="vis" id="bar">
-    <p>Compare the broadband speed between countries filtered by continents</p>
-  </div>
+  <p style="color: #FFFFFF;">Compare the broadband speed between countries filtered by continents</p>
+  <div class="vis" id="bar"></div>
     
   <script>
     const map = {
