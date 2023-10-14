@@ -38,12 +38,11 @@
   <p>This immersive experience takes you on a journey across continents, exploring the varying speeds at which people around the world connect to the internet</p>
   <div class="vis" id="map"/>
 
-  <h2>Hi</h2>
   <p>Compare the broadband speed between countries filtered by continents</p>
   <div class="vis" id="bar_chart"/>
     
   <script>
-    const map = {
+    var map = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 1000,
   "height": 450,
@@ -75,7 +74,7 @@
   }
 };
 
-    const bar_chart = {
+    var bar_chart = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
     "url": "https://raw.githubusercontent.com/dlee0069/FIT3179_Asg2/main/internet%20broadband%20and%20mobile%20speeds%20by%20country.csv"
@@ -113,8 +112,8 @@
   ]
 };
     
-    vegaEmbed("#map", map, {mode: "vega-lite"});
-    vegaEmbed("#bar_chart", bar_chart, {mode: "vega-lite"});
+    vegaEmbed("#map", map);
+    vegaEmbed("#bar_chart", bar_chart);
   </script>
 </body>
 </html>
