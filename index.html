@@ -29,10 +29,11 @@
 </head>
 <body>
   <h1>Global Broadband Speed</h1>
-  
-  <div id="vis"/>
+  <p>This immersive experience takes you on a journey across continents, exploring the varying speeds at which people around the world connect to the internet</p>
+  <div id="map"/>
+    
   <script>
-    const spec = {
+    const map = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
     "url": "https://raw.githubusercontent.com/dlee0069/FIT3179_Asg2/main/internet%20broadband%20and%20mobile%20speeds%20by%20country.csv"
@@ -141,7 +142,7 @@
   ],
   "config": {}
 };
-    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+    vegaEmbed("#map", map, {mode: "vega-lite"}).then(console.log).catch(console.warn);
   </script>
 </body>
 </html>
