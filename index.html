@@ -96,14 +96,20 @@
     {
       "mark": {"type": "rule", "color": "red", "strokeWidth": 2},
       "encoding": {
-        "y": {"field": "Broadband Mbps", "type": "quantitative", "aggregate": "average"}
+        "y": {"field": "Broadband Mbps", "type": "quantitative", "aggregate": "average"},
+        "tooltip": [
+          {"field": "Broadband Mbps", "type": "quantitative", "format": ".2f", "aggregate": "average", "title": "Average Broadband Mbps"}
+        ]
       }
     },
     {
       "mark": {"type": "text", "dy": -10},
       "encoding": {
         "y": {"field": "Broadband Mbps", "type": "quantitative", "aggregate": "average"},
-        "text": {"field": "Broadband Mbps", "type": "quantitative", "format": ".2f", "aggregate": "average"}
+        "text": {"field": "Broadband Mbps", "type": "quantitative", "format": ".2f", "aggregate": "average"},
+        "tooltip": [
+          {"field": "Broadband Mbps", "type": "quantitative", "format": ".2f", "aggregate": "average", "title": "Average Broadband Mbps"}
+        ]
       }
     }
   ],
