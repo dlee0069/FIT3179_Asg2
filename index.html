@@ -91,8 +91,8 @@
     {
       "mark": "bar",
       "encoding": {
-        "y": {"field": "Broadband Mbps", "type": "quantitative", "title": "Broadband Mbps"},
         "x": {"field": "Country", "type": "nominal", "title": "", "sort": "-y"},
+        "y": {"field": "Broadband Mbps", "type": "quantitative", "title": "Broadband Mbps"},
         "color": {
           "field": "Continent",
           "type": "nominal",
@@ -143,8 +143,8 @@
     {
       "mark": {"type": "bar"},
       "encoding": {
-        "x": {"field": "Country", "type": "nominal", "title": "", "sort": "-y"},
-        "y": {"field": "Broadband Mbps", "type": "quantitative", "title": "Broadband Mbps"},
+        "x": {"field": "Broadband Mbps", "type": "quantitative", "title": "Broadband Mbps"},
+        "y": {"field": "Country", "type": "nominal", "title": "", "sort": "-x"},
         "color": {"field": "Continent", "scale": {
             "domain": ["Asia", "North America", "South America", "Europe", "Oceania"],
             "range": ["steelblue", "brown", "lightblue", "orange", "purple"]
